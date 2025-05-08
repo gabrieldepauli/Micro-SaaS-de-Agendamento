@@ -45,7 +45,7 @@
     <div class="container">
         <h2 class="text-center mb-4">Cadastro de Professor</h2>
         
-        <form action="ServiceProviderController" method="POST" enctype="multipart/form-data">
+        <form action="TeacherController" method="POST" enctype="multipart/form-data">
             <div class="form-group">
                 <label for="businessName">Nome Fantasia</label>
                 <input type="text" class="form-control" id="businessName" name="businessName" required>
@@ -81,13 +81,7 @@
                 <input type="file" class="form-control-file" id="serviceImages" name="serviceImages" accept="image/*" multiple>
                 <small class="form-text text-muted">Escolha até 3 imagens para mostrar seus serviços.</small>
             </div>
-
-            <div class="form-group">
-                <label for="creationDate">Data de Criação</label>
-                <input type="date" class="form-control" id="creationDate" name="creationDate" required>
-            </div>
-
-            <!-- Centralizando os botões e colocando um embaixo do outro -->
+            
             <div class="d-flex flex-column justify-content-center align-items-center">
                 <button type="submit" class="btn btn-primary mb-3" style="width: 200px;">Cadastrar</button>
                 <a href="javascript:history.back()" class="btn btn-danger" style="width: 200px;">Voltar</a>

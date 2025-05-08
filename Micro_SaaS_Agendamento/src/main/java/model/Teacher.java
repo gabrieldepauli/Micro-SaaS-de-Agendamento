@@ -3,7 +3,9 @@ package model;
 import java.sql.Date;
 import java.util.List;
 
+//Classe do Prestador de Serviços e seus atributos (Professor)
 public class Teacher {
+	private int id;
 	private String businessName;
 	private String name;
 	private String profilePicture;
@@ -12,6 +14,8 @@ public class Teacher {
 	private String description;
 	private List<String> serviceImages;
     private Date date;
+    
+    public Teacher() {}
     
     public Teacher(String businessName, String name, String profilePicture, String specialty, String adress,
 			String description, List<String> serviceImages, Date date) {
@@ -25,6 +29,14 @@ public class Teacher {
 		this.date = date;
 	}	
     
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
 	public String getBusinessName() {
 		return businessName;
 	}

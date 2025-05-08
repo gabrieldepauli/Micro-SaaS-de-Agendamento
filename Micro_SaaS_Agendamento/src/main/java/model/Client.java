@@ -1,16 +1,28 @@
 package model;
 
+// Classe do Cliente e seus atributos (Aluno)
 public class Client {
+	private int id;
 	private String name;
 	private String cpf;
 	private String adress;
 	private String number;
+	
+	public Client() {}
 	
 	public Client(String name, String cpf, String adress, String number) {
 		this.name = name;
 		this.cpf = cpf;
 		this.adress = adress;
 		this.number = number;
+	}
+	
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	public String getName() {

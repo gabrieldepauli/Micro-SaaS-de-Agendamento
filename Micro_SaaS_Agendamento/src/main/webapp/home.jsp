@@ -32,10 +32,7 @@
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav ms-auto">
           <li class="nav-item">
-            <a class="nav-link" href="registerClient.jsp">Cadastro de Cliente</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="registerTeacher.jsp">Cadastro de Prestador de Serviços</a>
+            <a class="nav-link" href="registerUser.jsp">Cadastre-se</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="login.jsp">Login</a>
