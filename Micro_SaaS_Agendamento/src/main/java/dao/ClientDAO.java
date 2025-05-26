@@ -35,7 +35,7 @@ public class ClientDAO {
                 }
             }
 
-            String sqlClient = "INSERT INTO client (id, name, cpf, adress, number) VALUES (?, ?, ?, ?, ?)";
+            String sqlClient = "INSERT INTO cliente (id, full_name, cpf, adress, phone) VALUES (?, ?, ?, ?, ?)";
             try (PreparedStatement stmt = conn.prepareStatement(sqlClient)) {
                 stmt.setInt(1, client.getId());
                 stmt.setString(2, client.getName());

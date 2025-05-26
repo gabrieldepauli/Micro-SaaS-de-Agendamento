@@ -5,28 +5,26 @@ import java.util.List;
 
 //Classe do Prestador de Serviços e seus atributos (Professor)
 public class Teacher {
-	private int id;
+	private int id; // Auto increment no Banco de Dados
 	private String businessName;
 	private String name;
 	private String profilePicture;
 	private String specialty;
-	private String adress;
+	private String address;
 	private String description;
-	private List<String> serviceImages;
     private Date date;
+    private List<String> imagens;
     
     public Teacher() {}
     
-    public Teacher(String businessName, String name, String profilePicture, String specialty, String adress,
+    public Teacher(String businessName, String name, String profilePicture, String specialty, String address,
 			String description, List<String> serviceImages, Date date) {
 		this.businessName = businessName;
 		this.name = name;
 		this.profilePicture = profilePicture;
 		this.specialty = specialty;
-		this.adress = adress;
+		this.address = address;
 		this.description = description;
-		this.serviceImages = serviceImages;
-		this.date = date;
 	}	
     
 	public int getId() {
@@ -69,12 +67,12 @@ public class Teacher {
 		this.specialty = specialty;
 	}
 	
-	public String getAdress() {
-		return adress;
+	public String getAddress() {
+		return address;
 	}
 	
-	public void setAdress(String adress) {
-		this.adress = adress;
+	public void setAddress(String address) {
+		this.address = address;
 	}
 	
 	public String getDescription() {
@@ -85,20 +83,20 @@ public class Teacher {
 		this.description = description;
 	}
 	
-	public List<String> getServiceImages() {
-		return serviceImages;
-	}
-	
-	public void setServiceImages(List<String> serviceImages) {
-		this.serviceImages = serviceImages;
-	}
-	
 	public Date getDate() {
 		return date;
 	}
 	
 	public void setDate(Date date) {
 		this.date = date;
+	}
+	
+	public List<String> getImagens() {
+	    return imagens;
+	}
+
+	public void setImagens(List<String> imagens) {
+	    this.imagens = imagens;
 	}
 	
 }

@@ -11,7 +11,10 @@ import java.sql.SQLException;
 
 @WebServlet("/LoginServlet")
 public class LoginServlet extends HttpServlet {
-    @Override
+	
+    private static final long serialVersionUID = 1L;
+
+	@Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
@@ -24,12 +27,12 @@ public class LoginServlet extends HttpServlet {
 
             if (user != null) {
                 HttpSession session = request.getSession();
-                session.setAttribute("usuario", user);
+                session.setAttribute("usuarioLogado", user);
 
                 if ("CLIENT".equals(user.getTipo())) {
-                    response.sendRedirect("homeClient.jsp");
+                	response.sendRedirect(request.getContextPath() + "/HomeAluno");
                 } else if ("TEACHER".equals(user.getTipo())) {
-                    response.sendRedirect("homeTeacher.jsp");
+                    response.sendRedirect("/Micro_SaaS_Agendamento/teacher/homeTeacher.jsp");
                 } else {
                     response.sendRedirect("home.jsp");
                 }
@@ -40,6 +43,7 @@ public class LoginServlet extends HttpServlet {
 
         } catch (SQLException e) {
             e.printStackTrace();
+            
             response.sendRedirect("login.jsp?error=2");
         }
     }

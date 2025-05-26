@@ -2,7 +2,7 @@ package model;
 
 // Classe do Cliente e seus atributos (Aluno)
 public class Client {
-	private int id;
+	private int id; // Auto increment no Banco de Dados
 	private String name;
 	private String cpf;
 	private String adress;

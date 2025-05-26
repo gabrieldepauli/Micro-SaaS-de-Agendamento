@@ -43,26 +43,31 @@
 <body>
 
     <div class="container">
-        <h2 class="text-center mb-4">Cadastro de Cliente</h2>
+        <h2 class="text-center mb-4">Cadastro de Estudante</h2>
         
         <form action="ClientController" method="POST">
             <div class="form-group">
-                <label for="name">Nome</label>
-                <input type="text" class="form-control" id="name" name="name" required>
+                <label for="full_name">Nome:</label>
+                <input type="text" class="form-control" id="full_name" name="full_name" required>
             </div>
 
             <div class="form-group">
-                <label for="cpf">CPF</label>
+                <label for="cpf">CPF:</label>
                 <input type="text" class="form-control" id="cpf" name="cpf" required>
             </div>
 
             <div class="form-group">
-                <label for="adress">Endereço</label>
-                <input type="text" class="form-control" id="adress" name="adress" required>
-            </div>
+				<label for="address">Cidade:</label> <select class="form-control"
+					id="address" name="address" required>
+					<option value="">Selecione a cidade</option>
+					<option value="Araraquara">Araraquara</option>
+					<option value="São Carlos">São Carlos</option>
+					<option value="Ribeirão Preto">Ribeirão Preto</option>
+				</select>
+			</div>
 
             <div class="form-group">
-                <label for="phone">Número de Telefone</label>
+                <label for="phone">Número de Telefone:</label>
 
                 <input type="tel" class="form-control" id="phone" name="phone" 
                        pattern="^\(\d{2}\) \d{5}-\d{4}$" placeholder="(XX) XXXXX-XXXX" required>

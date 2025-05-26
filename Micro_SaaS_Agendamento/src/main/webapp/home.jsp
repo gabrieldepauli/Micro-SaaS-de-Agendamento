@@ -24,7 +24,7 @@
 <body>
   <nav class="navbar navbar-expand-lg navbar-custom">
     <div class="container">
-      <a class="navbar-brand" href="home.jsp">Aulas Particulares</a>
+      <a class="navbar-brand" href="home.jsp">EnsinaFacil</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
         <span class="navbar-toggler-icon"></span>
       </button>

@@ -13,12 +13,15 @@ import java.io.IOException;
 
 @WebServlet("/ClientController")
 public class ClientController extends HttpServlet {
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	
+    private static final long serialVersionUID = 1L;
+
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
         User usuarioLogado = (User) session.getAttribute("usuarioLogado");
 
         if (usuarioLogado != null && "CLIENT".equals(usuarioLogado.getTipo())) {
-            String name = request.getParameter("name");
+            String name = request.getParameter("full_name");
             String cpf = request.getParameter("cpf");
             String adress = request.getParameter("adress");
             String phone = request.getParameter("phone");
@@ -34,14 +37,13 @@ public class ClientController extends HttpServlet {
             boolean cadastrado = clientDAO.cadastrarClienteComUsuario(usuarioLogado, client);
 
             if (cadastrado) {
-                // Após inserir no banco, redireciona para página de sucesso
-                response.sendRedirect("cadastroSucesso.jsp");
+            	response.sendRedirect(request.getContextPath() + "/HomeAluno");
             } else {
-                // Em caso de erro
                 response.sendRedirect("erroCadastro.jsp");
             }
         } else {
-            response.sendRedirect("login.jsp");
+        	response.sendRedirect(request.getContextPath() + "login.jsp");
         }
     }
+	
 }
