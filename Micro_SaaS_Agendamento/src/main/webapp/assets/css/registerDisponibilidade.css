@@ -1,0 +1,14 @@
+body {
+	font-family: 'Roboto', sans-serif;
+	background: #f8f9fa;
+}
+
+.card-custom {
+	background-color: #ffffff;
+	border: 1px solid #dee2e6;
+	padding: 2rem;
+}
+
+th, td {
+	vertical-align: middle !important;
+}

@@ -12,13 +12,13 @@ import java.io.IOException;
 import java.nio.file.Paths;
 import java.util.List;
 
-@WebServlet("/portfolio")
+@WebServlet("/teacher/portfolio")
 @MultipartConfig(
     fileSizeThreshold = 1024 * 1024,
     maxFileSize = 5 * 1024 * 1024,
     maxRequestSize = 25 * 1024 * 1024
 )
-public class PortfolioServlet extends HttpServlet {
+public class PortfolioController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -53,7 +53,7 @@ public class PortfolioServlet extends HttpServlet {
 			dao.insertImage(usuarioLogado.getId(), relativePath);
 		}
 		
-		response.sendRedirect(request.getContextPath() + "/portfolio");
+		response.sendRedirect(request.getContextPath() + "/teacher/portfolio");
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

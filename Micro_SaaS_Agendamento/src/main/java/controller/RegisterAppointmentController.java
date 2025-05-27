@@ -14,7 +14,7 @@ import jakarta.servlet.http.HttpSession;
 import model.Appointment;
 import model.User;
 
-@WebServlet("/RegisterAppointment")
+@WebServlet("/client/RegisterAppointment")
 public class RegisterAppointmentController extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;

@@ -142,6 +142,60 @@ public class TeacherDAO {
     	return list;
     }
     
+    public List<Teacher> searchByCityAndSpecialty(String city, String specialty, int page) {
+        List<Teacher> list = new ArrayList<>();
+        String sql = "SELECT * FROM professor WHERE address LIKE ? AND specialty LIKE ? LIMIT ? OFFSET ?";
+
+        try (Connection conn = ConnectionManager.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+
+            ps.setString(1, "%" + (city != null ? city : "") + "%");
+            ps.setString(2, "%" + (specialty != null ? specialty : "") + "%");
+            ps.setInt(3, itemsPerPage);
+            ps.setInt(4, itemsPerPage * page);
+
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                Teacher teacher = new Teacher();
+                teacher.setId(rs.getInt("id"));
+                teacher.setBusinessName(rs.getString("businessName"));
+                teacher.setName(rs.getString("fullName"));
+                teacher.setProfilePicture(rs.getString("profilePicture"));
+                teacher.setSpecialty(rs.getString("specialty"));
+                teacher.setAddress(rs.getString("address"));
+                teacher.setDescription(rs.getString("descricao"));
+                teacher.setDate(rs.getDate("data_criacao"));
+                list.add(teacher);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return list;
+    }
+
+    public List<String> listAllSpecialties() {
+        List<String> specialties = new ArrayList<>();
+        String sql = "SELECT DISTINCT specialty FROM professor WHERE specialty IS NOT NULL AND specialty <> ''";
+
+        try (Connection conn = ConnectionManager.getConnection();
+        	PreparedStatement stmt = conn.prepareStatement(sql);
+            
+        		ResultSet rs = stmt.executeQuery()) {
+
+            while (rs.next()) {
+                specialties.add(rs.getString("specialty"));
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return specialties;
+    }   
+    
     public int getPages() {
     	int pages = 0;
     	String sql = "SELECT COUNT(id) AS total FROM professor";
@@ -182,5 +236,29 @@ public class TeacherDAO {
     	
     	return pages;
     }
+    
+    public int getPagesByCityAndSpecialty(String city, String specialty) {
+        int pages = 0;
+        String sql = "SELECT COUNT(id) AS total FROM professor WHERE address LIKE ? AND specialty LIKE ?";
+
+        try (Connection conn = ConnectionManager.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+
+            ps.setString(1, "%" + (city != null ? city : "") + "%");
+            ps.setString(2, "%" + (specialty != null ? specialty : "") + "%");
+
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                pages = rs.getInt("total");
+                pages = (int) Math.ceil((double) pages / itemsPerPage);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return pages;
+    }
+
     
 }

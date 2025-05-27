@@ -45,10 +45,10 @@ public class UserDAO {
             int rowsAffected = ps.executeUpdate();
 
             if (rowsAffected > 0) {
-                // Obter o id gerado automaticamente
                 ResultSet rs = ps.getGeneratedKeys();
+                
                 if (rs.next()) {
-                    user.setId(rs.getInt(1));  // Definir o id do usuário
+                    user.setId(rs.getInt(1));
                 }
                 return true;
             } else {

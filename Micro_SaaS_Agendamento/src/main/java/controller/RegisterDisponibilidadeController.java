@@ -10,7 +10,7 @@ import model.User;
 import java.io.IOException;
 import java.sql.Time;
 
-@WebServlet("/RegisterDisponibilidade")
+@WebServlet("/teacher/RegisterDisponibilidade")
 public class RegisterDisponibilidadeController extends HttpServlet {
 
     private static final long serialVersionUID = 1L;

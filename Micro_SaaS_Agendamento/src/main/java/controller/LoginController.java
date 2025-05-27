@@ -10,7 +10,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 
 @WebServlet("/LoginServlet")
-public class LoginServlet extends HttpServlet {
+public class LoginController extends HttpServlet {
 	
     private static final long serialVersionUID = 1L;
 
@@ -30,7 +30,7 @@ public class LoginServlet extends HttpServlet {
                 session.setAttribute("usuarioLogado", user);
 
                 if ("CLIENT".equals(user.getTipo())) {
-                	response.sendRedirect(request.getContextPath() + "/HomeAluno");
+                	response.sendRedirect(request.getContextPath() + "/client/HomeAluno");
                 } else if ("TEACHER".equals(user.getTipo())) {
                     response.sendRedirect("/Micro_SaaS_Agendamento/teacher/homeTeacher.jsp");
                 } else {

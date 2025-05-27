@@ -7,11 +7,9 @@ import dao.AppointmentDAO;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.*;
-import model.User;
-import model.Appointment;
-import model.Status;
+import model.*;
 
-@WebServlet("/ListClientAppointment")
+@WebServlet("/client/ListClientAppointment")
 public class ListClientAppointmentController extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
@@ -58,4 +56,5 @@ public class ListClientAppointmentController extends HttpServlet {
 			e.printStackTrace();
 		}
 	}
+	
 }

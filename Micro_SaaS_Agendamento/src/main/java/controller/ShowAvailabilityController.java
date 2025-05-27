@@ -11,7 +11,7 @@ import model.Availability;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 
-@WebServlet("/ShowAvailability")
+@WebServlet("/client/ShowAvailability")
 public class ShowAvailabilityController extends HttpServlet {
 	
 	private static final long serialVersionUID = 1L;

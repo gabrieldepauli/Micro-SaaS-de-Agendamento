@@ -27,50 +27,10 @@ if (selectedDate != null) {
 <head>
 <meta charset="UTF-8">
 <title>Agendar horário</title>
-<link
-	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
-	rel="stylesheet">
-<link
-	href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap"
-	rel="stylesheet">
-<style>
-body {
-	background-color: #f2f6fc;
-	font-family: 'Roboto', sans-serif;
-}
-
-.card-center {
-	max-width: 600px;
-	margin: 50px auto;
-	background-color: #ffffff;
-	padding: 30px;
-	border-radius: 15px;
-	box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
-}
-
-h2, h4 {
-	text-align: center;
-	color: #2c3e50;
-}
-
-.btn-primary {
-	background-color: #2980b9;
-	border-color: #2980b9;
-}
-
-.btn-success {
-	background-color: #27ae60;
-	border-color: #27ae60;
-}
-
-.btn-danger {
-	width: 100%;
-}
-
-hr {
-	margin: 30px 0;
-}
-</style>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+<link href="${pageContext.request.contextPath}/assets/css/appointment.css" rel="stylesheet">
+<link rel="icon" href="${pageContext.request.contextPath}/assets/images/logo.jpg" type="image/x-icon">
 </head>
 <body>
 
@@ -90,20 +50,19 @@ hr {
 	<div class="card-center">
 		<h2 class="mb-4">Agendar Horário</h2>
 
-		<!-- MENSAGEM CONDICIONAL -->
 		<c:if test="${not empty sessionScope.mensagem}">
 			<div class="alert alert-info text-center">${sessionScope.mensagem}</div>
 			<c:remove var="mensagem" scope="session"/>
 		</c:if>
 
-		<form method="get" action="/Micro_SaaS_Agendamento/ShowAvailability"
+		<form method="get" action="/Micro_SaaS_Agendamento/client/ShowAvailability"
 			class="mb-4">
 			<input type="hidden" name="teacher_id" value="<%=teacher_id%>" />
 
 			<div class="mb-3">
 				<label for="data_agendamento" class="form-label">Escolha um dia:</label>
 				<%
-				String today = LocalDate.now().toString(); // yyyy-MM-dd
+				String today = LocalDate.now().toString();
 				%>
 
 				<input type="date" name="data_agendamento" class="form-control"
@@ -120,7 +79,7 @@ hr {
 
 		<h4 class="mb-3">Horários disponíveis para <%=formattedDate%>:</h4>
 
-		<form method="post" action="/Micro_SaaS_Agendamento/RegisterAppointment" class="mb-4">
+		<form method="post" action="/Micro_SaaS_Agendamento/client/RegisterAppointment" class="mb-4">
 			<input type="hidden" name="teacher_id" value="<%=teacher_id%>" />
 			<input type="hidden" name="data_agendamento" value="<%=selectedDate%>" />
 
@@ -149,7 +108,7 @@ hr {
 		%>
 
 		<hr />
-		<a href="${pageContext.request.contextPath}/HomeAluno" class="btn btn-danger">Voltar</a>
+		<a href="${pageContext.request.contextPath}/client/HomeAluno" class="btn btn-danger">Voltar</a>
 	</div>
 
 	<script

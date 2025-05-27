@@ -9,20 +9,8 @@
     <title>Horários - Professor</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
-    <style>
-        body {
-            font-family: 'Roboto', sans-serif;
-            background: #f8f9fa;
-        }
-        .card-custom {
-            background-color: #ffffff;
-            border: 1px solid #dee2e6;
-            padding: 2rem;
-        }
-        th, td {
-            vertical-align: middle !important;
-        }
-    </style>
+    <link href="${pageContext.request.contextPath}/assets/css/registerDisponibilidade.css" rel="stylesheet">
+	<link rel="icon" href="${pageContext.request.contextPath}/assets/images/logo.jpg" type="image/x-icon">
 </head>
 <body>
 
@@ -30,7 +18,7 @@
 	    <div class="card card-custom shadow-sm mx-auto" style="max-width: 1000px;">
 	        <h3 class="text-center mb-4">Cadastrar Horários de Disponibilidade</h3>
 	
-	        <form action="${pageContext.request.contextPath}/RegisterDisponibilidade" method="post">
+	        <form action="${pageContext.request.contextPath}/teacher/RegisterDisponibilidade" method="post">
 	            <div class="table-responsive">
 	                <table class="table table-bordered text-center align-middle">
 	                    <thead class="table-primary">

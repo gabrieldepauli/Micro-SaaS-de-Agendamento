@@ -6,44 +6,44 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
 import model.Client;
 import model.User;
 import java.io.IOException;
 
 @WebServlet("/ClientController")
-public class ClientController extends HttpServlet {
+public class RegisterClientController extends HttpServlet {
 	
     private static final long serialVersionUID = 1L;
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        HttpSession session = request.getSession();
-        User usuarioLogado = (User) session.getAttribute("usuarioLogado");
+        String email = request.getParameter("email");
+        String senha = request.getParameter("senha");
+        String tipo = request.getParameter("tipo");
 
-        if (usuarioLogado != null && "CLIENT".equals(usuarioLogado.getTipo())) {
+        if (email != null && senha != null && "CLIENT".equals(tipo)) {
             String name = request.getParameter("full_name");
             String cpf = request.getParameter("cpf");
-            String adress = request.getParameter("adress");
+            String address = request.getParameter("address");
             String phone = request.getParameter("phone");
 
+            User usuario = new User(email, senha, tipo);
+
             Client client = new Client();
-            client.setId(usuarioLogado.getId());
             client.setName(name);
             client.setCpf(cpf);
-            client.setAdress(adress);
+            client.setAdress(address);
             client.setNumber(phone);
 
             ClientDAO clientDAO = new ClientDAO();
-            boolean cadastrado = clientDAO.cadastrarClienteComUsuario(usuarioLogado, client);
+            boolean cadastrado = clientDAO.cadastrarClienteComUsuario(usuario, client);
 
             if (cadastrado) {
-            	response.sendRedirect(request.getContextPath() + "/HomeAluno");
+                response.sendRedirect(request.getContextPath() + "/login.jsp");
             } else {
                 response.sendRedirect("erroCadastro.jsp");
             }
         } else {
-        	response.sendRedirect(request.getContextPath() + "login.jsp");
+            response.sendRedirect("login.jsp");
         }
     }
-	
 }

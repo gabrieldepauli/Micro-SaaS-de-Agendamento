@@ -19,15 +19,17 @@ import java.util.UUID;
     maxFileSize = 5 * 1024 * 1024,
     maxRequestSize = 25 * 1024 * 1024
 )
-public class TeacherController extends HttpServlet {
+public class RegisterTeacherController extends HttpServlet {
 
     private static final long serialVersionUID = 1L;
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        HttpSession session = request.getSession();
-        User usuarioLogado = (User) session.getAttribute("usuarioLogado");
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        if (usuarioLogado != null && "TEACHER".equals(usuarioLogado.getTipo())) {
+        String email = request.getParameter("email");
+        String senha = request.getParameter("senha");
+        String tipo = request.getParameter("tipo");
+
+        if (email != null && senha != null && "TEACHER".equals(tipo)) {
 
             String businessName = request.getParameter("businessName");
             String fullName = request.getParameter("fullName");
@@ -52,11 +54,12 @@ public class TeacherController extends HttpServlet {
             if (!uploadDir.exists()) uploadDir.mkdirs();
 
             filePart.write(uploadPath + File.separator + uniqueFileName);
-
+ 
             String profilePicture = "image/" + uniqueFileName;
 
+            User usuario = new User(email, senha, tipo);
+
             Teacher teacher = new Teacher();
-            teacher.setId(usuarioLogado.getId());
             teacher.setBusinessName(businessName);
             teacher.setName(fullName);
             teacher.setProfilePicture(profilePicture);
@@ -65,7 +68,7 @@ public class TeacherController extends HttpServlet {
             teacher.setDescription(description);
 
             TeacherDAO teacherDAO = new TeacherDAO();
-            boolean cadastrado = teacherDAO.cadastrarProfessorComUsuario(usuarioLogado, teacher);
+            boolean cadastrado = teacherDAO.cadastrarProfessorComUsuario(usuario, teacher);
 
             if (cadastrado) {
                 response.sendRedirect(request.getContextPath() + "/teacher/homeTeacher.jsp");

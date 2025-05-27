@@ -1,19 +1,17 @@
 package model;
 
-import java.time.LocalDateTime;
+import java.sql.Timestamp;
 
 public class LogAppointment {
 	private int id;
 	private int appointmentId;
 	private Status previousStatus;
     private Status newStatus;
-    private LocalDateTime changedAt; 
+    private Timestamp changedAt; 
 	
-	public LogAppointment() {
-		this.changedAt = LocalDateTime.now();
-	}
+	public LogAppointment() {}
 
-	public LogAppointment(int appointmentId, Status previousStatus, Status newStatus, LocalDateTime changedAt) {
+	public LogAppointment(int appointmentId, Status previousStatus, Status newStatus, Timestamp  changedAt) {
 		this.appointmentId = appointmentId;
 		this.previousStatus = previousStatus;
 		this.newStatus = newStatus;
@@ -52,11 +50,11 @@ public class LogAppointment {
 		this.newStatus = newStatus;
 	}
 
-	public LocalDateTime getChangedAt() {
+	public Timestamp getChangedAt() {
 		return changedAt;
 	}
 
-	public void setChangedAt(LocalDateTime changedAt) {
+	public void setChangedAt(Timestamp  changedAt) {
 		this.changedAt = changedAt;
 	}
 	

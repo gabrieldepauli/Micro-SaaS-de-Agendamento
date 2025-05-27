@@ -1,7 +1,7 @@
 package model;
 
 public enum Status {
-    SOLICITADO,
+	SOLICITADO,
     ACEITO,
     CONCLUIDO
 }

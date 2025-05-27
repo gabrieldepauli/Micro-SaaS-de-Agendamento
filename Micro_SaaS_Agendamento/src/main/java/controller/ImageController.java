@@ -10,7 +10,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 @WebServlet("/image/*")
-public class ImageServlet extends HttpServlet {
+public class ImageController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
 	private static final String BASE_PATH_PORT = "C:\\uploads\\portfolio\\";
