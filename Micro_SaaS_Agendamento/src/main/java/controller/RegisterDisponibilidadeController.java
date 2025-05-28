@@ -38,21 +38,71 @@ public class RegisterDisponibilidadeController extends HttpServlet {
                 String descansoFim = request.getParameter("descanso_fim_" + i);
                 String duracao = request.getParameter("tempo_servico_" + i);
 
-                if (inicio == null || fim == null || duracao == null ||
-                    inicio.isEmpty() || fim.isEmpty() || duracao.isEmpty()) {
+                if ((inicio != null && !inicio.isEmpty()) || (fim != null && !fim.isEmpty()) || (duracao != null && !duracao.isEmpty())) {
+                    if (inicio == null || inicio.isEmpty() || fim == null || fim.isEmpty() || duracao == null || duracao.isEmpty()) {
+                        algumErro = true;
+                        mensagensErro.append("Para o dia ").append(nomeDoDia(i)).append(", início, fim e duração devem ser preenchidos juntos.<br>");
+                        
+                        continue;
+                    }
+                } else {
                     continue;
                 }
 
                 Time horarioInicio = Time.valueOf(inicio + ":00");
                 Time horarioFim = Time.valueOf(fim + ":00");
-                Time descansoIni = (descansoInicio != null && !descansoInicio.isEmpty()) ? Time.valueOf(descansoInicio + ":00") : Time.valueOf("00:00:00");
-                Time descansoFinal = (descansoFim != null && !descansoFim.isEmpty()) ? Time.valueOf(descansoFim + ":00") : Time.valueOf("00:00:00");
+
+                if (horarioInicio.after(horarioFim) || horarioFim.before(horarioInicio)) {
+                    algumErro = true;
+                    mensagensErro.append("Horário de início não pode ser maior que o horário de fim no dia ").append(nomeDoDia(i)).append(".<br>");
+                    
+                    continue;
+                }
+
+                Time descansoIni = (descansoInicio != null && !descansoInicio.isEmpty()) ? Time.valueOf(descansoInicio + ":00") : null;
+                Time descansoFinal = (descansoFim != null && !descansoFim.isEmpty()) ? Time.valueOf(descansoFim + ":00") : null;
                 Time tempoServico = Time.valueOf(duracao + ":00");
+                
+                if (tempoServico.equals(Time.valueOf("00:00:00"))) {
+                    algumErro = true;
+                    mensagensErro.append("A duração do serviço no dia ").append(nomeDoDia(i)).append(" deve ser maior que zero.<br>");
+                    continue;
+                }
+
+                if (descansoIni != null && descansoFinal != null) {
+
+                    if (descansoIni.after(descansoFinal)) {
+                        algumErro = true;
+                        mensagensErro.append("Horário de início do descanso não pode ser maior que o horário de fim do descanso no dia ").append(nomeDoDia(i)).append(".<br>");
+                        
+                        continue;
+                    }
+
+                    if (descansoFinal.before(descansoIni)) {
+                        algumErro = true;
+                        mensagensErro.append("Horário de fim do descanso não pode ser menor que o horário de início do descanso no dia ").append(nomeDoDia(i)).append(".<br>");
+                        
+                        continue;
+                    }
+
+                    if (descansoIni.before(horarioInicio) || descansoFinal.after(horarioFim)) {
+                        algumErro = true;
+                        mensagensErro.append("Horário de descanso deve estar dentro do intervalo de início e fim da disponibilidade no dia ").append(nomeDoDia(i)).append(".<br>");
+                        
+                        continue;
+                    }
+                } else if ((descansoIni != null && descansoFinal == null) || (descansoIni == null && descansoFinal != null)) {
+                    algumErro = true;
+                    mensagensErro.append("Para o dia ").append(nomeDoDia(i)).append(", ambos os horários de descanso devem ser preenchidos ou deixados em branco.<br>");
+                    
+                    continue;
+                }
 
                 Availability existente = dao.searchByTeacherAndDay(professorId, i);
                 if (existente != null) {
                     algumErro = true;
                     mensagensErro.append("Já existe disponibilidade cadastrada para o dia ").append(nomeDoDia(i)).append(".<br>");
+                    
                     continue;
                 }
 
@@ -61,8 +111,8 @@ public class RegisterDisponibilidadeController extends HttpServlet {
                 disp.setDay(i);
                 disp.setStart_time(horarioInicio);
                 disp.setEnd_time(horarioFim);
-                disp.setInitial_rest_time(descansoIni);
-                disp.setFinal_rest_time(descansoFinal);
+                disp.setInitial_rest_time(descansoIni != null ? descansoIni : Time.valueOf("00:00:00"));
+                disp.setFinal_rest_time(descansoFinal != null ? descansoFinal : Time.valueOf("00:00:00"));
                 disp.setService_duration(tempoServico);
 
                 dao.insertDisponibilidade(disp);
@@ -95,4 +145,5 @@ public class RegisterDisponibilidadeController extends HttpServlet {
             default: return "Desconhecido";
         }
     }
+    
 }
