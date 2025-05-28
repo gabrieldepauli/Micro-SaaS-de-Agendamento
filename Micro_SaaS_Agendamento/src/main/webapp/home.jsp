@@ -35,7 +35,7 @@
   </nav>
 
   <main class="container">
-    <h1>Bem-vindo ao Micro SaaS de Agendamento de Aulas Particulares!</h1>
+    <h1>Bem-vindo ao MicroSaaS de Agendamento de Aulas Particulares!</h1>
   </main>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>

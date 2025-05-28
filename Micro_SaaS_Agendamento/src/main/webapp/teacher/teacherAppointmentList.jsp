@@ -40,6 +40,7 @@
     <div class="table-responsive">
         <table class="table table-bordered table-hover">
             <thead class="table-dark"> <tr>
+                    <th>ID Aluno</th>
                     <th>Aluno</th>
                     <th>Data</th>
                     <th>Horário</th>
@@ -50,6 +51,7 @@
                 <c:forEach var="a" items="${sessionScope.appointment}">
                     <tr>
                         <td>${a.clientId}</td> 
+                        <td>${a.clientName}</td> 
                         <td>${a.date}</td>
                         <td>${a.time}</td>
                         <td>${a.status}</td>

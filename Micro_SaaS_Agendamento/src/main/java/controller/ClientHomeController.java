@@ -49,8 +49,9 @@ public class ClientHomeController extends HttpServlet {
 
 	    } catch (Exception e) {
 	        e.printStackTrace();
-	        request.setAttribute("erro", "Falha para carregar os professores.");
+	        request.setAttribute("mensagem", "Falha para carregar os professores.");
 	        request.getRequestDispatcher("/erro.jsp").forward(request, response);
+	        
 	        return;
 	    }
 
@@ -60,7 +61,6 @@ public class ClientHomeController extends HttpServlet {
 	    request.setAttribute("selectedCity", city);
 	    request.setAttribute("selectedSpecialty", specialty);
 
-	    // O forward deve vir por último
 	    request.getRequestDispatcher("/client/homeClient.jsp").forward(request, response);
 	}
 }

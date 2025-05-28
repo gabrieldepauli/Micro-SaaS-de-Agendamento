@@ -20,7 +20,7 @@
 
   <h2 class="text-center">Cadastro de Estudante</h2>
 
-  <form action="ClientController" method="POST" novalidate>
+  <form action="ClientController" method="POST">
     <input type="hidden" name="email" value="${param.email}" />
     <input type="hidden" name="senha" value="${param.senha}" />
     <input type="hidden" name="tipo" value="${param.tipo}" />

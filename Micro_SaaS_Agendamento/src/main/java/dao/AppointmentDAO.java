@@ -91,7 +91,14 @@ public class AppointmentDAO {
 	
 	public List<Appointment> listByClient(int client_id, int page) {
 		List<Appointment> list = new ArrayList<Appointment>();
-		String sql = "SELECT * FROM agendamento WHERE cliente_id = ? ORDER BY data_agendamento, horario LIMIT ? OFFSET ?";
+		String sql = """
+			    SELECT a.*, p.fullName AS professor_name
+			    FROM agendamento a
+			    JOIN professor p ON a.professor_id = p.id
+			    WHERE a.cliente_id = ?
+			    ORDER BY a.data_agendamento, a.horario
+			    LIMIT ? OFFSET ?
+			""";
 		
 		try (Connection conn = ConnectionManager.getConnection();
    			 	PreparedStatement ps = conn.prepareStatement(sql)) {
@@ -114,6 +121,8 @@ public class AppointmentDAO {
 					String status = rs.getString("status");
 					appointment.setStatus(Status.valueOf(status));
 					
+					appointment.setProfessorName(rs.getString("professor_name"));
+					
 					list.add(appointment);
 				}
 			}
@@ -126,8 +135,15 @@ public class AppointmentDAO {
 	}
 	
 	public List<Appointment> listByTeacher(int teacher_id, int page) {
-		List<Appointment> list = new ArrayList<Appointment>();
-		String sql = "SELECT * FROM agendamento WHERE professor_id = ? ORDER BY data_agendamento, horario LIMIT ? OFFSET ?";
+		List<Appointment> list = new ArrayList<Appointment>();	
+		String sql = """
+			    SELECT a.*, c.full_name AS client_name
+			    FROM agendamento a
+			    JOIN cliente c ON a.cliente_id = c.id
+			    WHERE a.professor_id = ?
+			    ORDER BY a.data_agendamento, a.horario
+			    LIMIT ? OFFSET ?
+			""";
 		
 		try (Connection conn = ConnectionManager.getConnection();
    			 	PreparedStatement ps = conn.prepareStatement(sql)) {
@@ -149,6 +165,8 @@ public class AppointmentDAO {
 
 					String status = rs.getString("status");
 					appointment.setStatus(Status.valueOf(status));
+					
+					appointment.setClientName(rs.getString("client_name"));
 					
 					list.add(appointment);
 				}

@@ -1,6 +1,7 @@
 package controller;
 
 import dao.ClientDAO;
+import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -40,7 +41,9 @@ public class RegisterClientController extends HttpServlet {
             if (cadastrado) {
                 response.sendRedirect(request.getContextPath() + "/login.jsp");
             } else {
-                response.sendRedirect("erroCadastro.jsp");
+            	request.setAttribute("mensagem", "Erro ao inserir cliente!");
+            	RequestDispatcher dispatcher = request.getRequestDispatcher("erro.jsp");
+            	dispatcher.forward(request, response);
             }
         } else {
             response.sendRedirect("login.jsp");

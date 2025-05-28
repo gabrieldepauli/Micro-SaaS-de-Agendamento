@@ -6,11 +6,11 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-<meta charset="UTF-8">
-<title>Error Page</title>
-<link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-<link rel="stylesheet" href="css/style.css">
-<link rel="icon" href="assets/images/logo.jpg" type="image/x-icon">
+	<meta charset="UTF-8">
+	<title>Error Page</title>
+	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+	<link rel="stylesheet" href="css/style.css">
+	<link rel="icon" href="assets/images/logo.jpg" type="image/x-icon">
 </head>
 <body>
     <div class="container mt-5">
@@ -20,7 +20,7 @@
             <a href="home.jsp" class="btn btn-danger">Voltar para página inicial</a>
         </div>
     </div>
-<!-- Bootstrap JS e scripts opcionais -->
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>

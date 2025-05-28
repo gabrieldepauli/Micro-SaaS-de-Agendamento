@@ -1,6 +1,7 @@
 package controller;
 
 import dao.TeacherDAO;
+import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.annotation.WebServlet;
@@ -73,7 +74,9 @@ public class RegisterTeacherController extends HttpServlet {
             if (cadastrado) {
                 response.sendRedirect(request.getContextPath() + "/teacher/homeTeacher.jsp");
             } else {
-                response.sendRedirect("erroCadastro.jsp");
+            	request.setAttribute("mensagem", "Erro ao inserir professor!");
+            	RequestDispatcher dispatcher = request.getRequestDispatcher("erro.jsp");
+            	dispatcher.forward(request, response);
             }
 
         } else {

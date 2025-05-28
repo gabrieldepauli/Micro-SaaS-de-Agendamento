@@ -8,7 +8,9 @@ public class Appointment {
 
     private int id;
     private int clientId;
+    private String clientName;
     private int professorId;
+    private String professorName;
     private LocalDate date;
     private LocalTime time;
     private Status status;
@@ -45,12 +47,28 @@ public class Appointment {
         this.clientId = clientId;
     }
 
-    public int getProfessorId() {
+    public String getClientName() {
+		return clientName;
+	}
+
+	public void setClientName(String clientName) {
+		this.clientName = clientName;
+	}
+
+	public int getProfessorId() {
         return professorId;
     }
 
     public void setProfessorId(int professorId) {
         this.professorId = professorId;
+    }
+    
+    public String getProfessorName() {
+        return professorName;
+    }
+
+    public void setProfessorName(String professorName) {
+        this.professorName = professorName;
     }
 
     public LocalDate getDate() {

@@ -40,6 +40,7 @@
 			<table class="table table-bordered table-hover">
 				<thead>
 					<tr>
+						<th>ID Professor</th>
 						<th>Professor</th>
 						<th>Data</th>
 						<th>Horário</th>
@@ -50,6 +51,7 @@
 					<c:forEach var="a" items="${sessionScope.appointment}">
 						<tr>
 							<td>${a.professorId}</td>
+							<td>${a.professorName}</td>
 							<td>${a.date}</td>
 							<td>${a.time}</td>
 							<td>
