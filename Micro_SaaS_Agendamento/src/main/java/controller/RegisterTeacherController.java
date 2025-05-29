@@ -42,7 +42,7 @@ public class RegisterTeacherController extends HttpServlet {
             String originalFileName = Paths.get(filePart.getSubmittedFileName()).getFileName().toString();
             String fileNameLower = originalFileName.toLowerCase();
 
-            if (!(fileNameLower.endsWith(".jpg") || fileNameLower.endsWith(".jpeg"))) {
+            if (!(fileNameLower.endsWith(".jpg") || fileNameLower.endsWith(".jpeg") || fileNameLower.endsWith(".png"))) {
                 response.sendRedirect("erroFormatoArquivo.jsp");
                 return;
             }
