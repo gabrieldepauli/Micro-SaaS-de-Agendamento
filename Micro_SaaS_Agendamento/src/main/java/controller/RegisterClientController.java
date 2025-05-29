@@ -26,6 +26,11 @@ public class RegisterClientController extends HttpServlet {
             String cpf = request.getParameter("cpf");
             String address = request.getParameter("address");
             String phone = request.getParameter("phone");
+            
+            if (address == null || address.isEmpty()) {
+                response.sendRedirect(request.getContextPath() + "/registerClient.jsp?error=cidade");
+                return;
+            }
 
             User usuario = new User(email, senha, tipo);
 

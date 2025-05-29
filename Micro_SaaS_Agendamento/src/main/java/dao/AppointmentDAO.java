@@ -181,42 +181,59 @@ public class AppointmentDAO {
 	
 	public List<Appointment> listByStatus(int client_id, int page, Status status) {
 	    List<Appointment> list = new ArrayList<>();
-	    String sql = "SELECT * FROM agendamento WHERE cliente_id = ? AND status = ? ORDER BY data_agendamento, horario LIMIT ? OFFSET ?";
-	    
+	    String sql = """
+	        SELECT a.*, p.fullName 
+	        FROM agendamento a
+	        JOIN professor p ON a.professor_id = p.id
+	        WHERE a.cliente_id = ? AND a.status = ?
+	        ORDER BY a.data_agendamento, a.horario
+	        LIMIT ? OFFSET ?
+	    """;
+
 	    try (Connection conn = ConnectionManager.getConnection();
 	         PreparedStatement ps = conn.prepareStatement(sql)) {
-	        
+
 	        ps.setInt(1, client_id);
 	        ps.setString(2, status.name());
 	        ps.setInt(3, itemsPerPage);
 	        ps.setInt(4, itemsPerPage * page);
-	        
+
 	        try (ResultSet rs = ps.executeQuery()) {
 	            while (rs.next()) {
 	                Appointment appointment = new Appointment();
-	                
+
 	                appointment.setId(rs.getInt("id"));
 	                appointment.setClientId(rs.getInt("cliente_id"));
 	                appointment.setProfessorId(rs.getInt("professor_id"));
 	                appointment.setDate(rs.getDate("data_agendamento").toLocalDate());
 	                appointment.setTime(rs.getTime("horario").toLocalTime());
 	                appointment.setStatus(Status.valueOf(rs.getString("status")));
-	                
+
+	                appointment.setProfessorName(rs.getString("fullName"));
+
 	                list.add(appointment);
 	            }
 	        }
-	        
+
 	    } catch (Exception e) {
 	        e.printStackTrace();
 	    }
-	    
+
 	    return list;
 	}
+
 	
 	public List<Appointment> listByStatusTeacher(int professor_id, int page, Status status) {
 	    List<Appointment> list = new ArrayList<>();
-	    String sql = "SELECT * FROM agendamento WHERE professor_id = ? AND status = ? ORDER BY data_agendamento, horario LIMIT ? OFFSET ?";
-	    
+	    String sql = """
+	        SELECT a.*, c.full_name 
+	        FROM agendamento a
+	        JOIN cliente c ON a.cliente_id = c.id
+	        WHERE a.professor_id = ? AND a.status = ?
+	        ORDER BY a.data_agendamento, a.horario
+	        LIMIT ? OFFSET ?
+	    """;
+
 	    try (Connection conn = ConnectionManager.getConnection();
 	         PreparedStatement ps = conn.prepareStatement(sql)) {
 	        
@@ -224,30 +241,33 @@ public class AppointmentDAO {
 	        ps.setString(2, status.name());
 	        ps.setInt(3, itemsPerPage);
 	        ps.setInt(4, itemsPerPage * page);
-	        
+
 	        try (ResultSet rs = ps.executeQuery()) {
 	            while (rs.next()) {
 	                Appointment appointment = new Appointment();
-	                
+
 	                appointment.setId(rs.getInt("id"));
 	                appointment.setClientId(rs.getInt("cliente_id"));
 	                appointment.setProfessorId(rs.getInt("professor_id"));
 	                appointment.setDate(rs.getDate("data_agendamento").toLocalDate());
 	                appointment.setTime(rs.getTime("horario").toLocalTime());
 	                appointment.setStatus(Status.valueOf(rs.getString("status")));
-	                
+
+	                appointment.setClientName(rs.getString("full_name"));
+
 	                list.add(appointment);
 	            }
 	        }
-	        
+
 	    } catch (Exception e) {
 	        e.printStackTrace();
 	    }
-	    
+
 	    System.out.println(list.size());
 	    
 	    return list;
 	}
+
 	
 	public int getPages() {
 		int pages = 0;

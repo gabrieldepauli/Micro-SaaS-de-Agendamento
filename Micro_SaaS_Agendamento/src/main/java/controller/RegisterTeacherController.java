@@ -38,6 +38,11 @@ public class RegisterTeacherController extends HttpServlet {
             String address = request.getParameter("address");
             String description = request.getParameter("descricao");
 
+            if (address == null || address.isEmpty()) {
+                response.sendRedirect(request.getContextPath() + "/registerTeacher.jsp?error=cidade");
+                return;
+            }
+
             Part filePart = request.getPart("profilePicture");
             String originalFileName = Paths.get(filePart.getSubmittedFileName()).getFileName().toString();
             String fileNameLower = originalFileName.toLowerCase();
@@ -55,7 +60,7 @@ public class RegisterTeacherController extends HttpServlet {
             if (!uploadDir.exists()) uploadDir.mkdirs();
 
             filePart.write(uploadPath + File.separator + uniqueFileName);
- 
+
             String profilePicture = "image/" + uniqueFileName;
 
             User usuario = new User(email, senha, tipo);
@@ -74,13 +79,15 @@ public class RegisterTeacherController extends HttpServlet {
             if (cadastrado) {
                 response.sendRedirect(request.getContextPath() + "/teacher/homeTeacher.jsp");
             } else {
-            	request.setAttribute("mensagem", "Erro ao inserir professor!");
-            	RequestDispatcher dispatcher = request.getRequestDispatcher("erro.jsp");
-            	dispatcher.forward(request, response);
+                request.setAttribute("mensagem", "Erro ao inserir professor!");
+                RequestDispatcher dispatcher = request.getRequestDispatcher("erro.jsp");
+                dispatcher.forward(request, response);
             }
 
         } else {
             response.sendRedirect("login.jsp");
         }
+        
     }
+    
 }

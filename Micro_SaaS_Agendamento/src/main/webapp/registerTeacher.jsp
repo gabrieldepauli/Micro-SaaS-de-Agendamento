@@ -21,9 +21,16 @@
 		</div>
 
 		<h2 class="text-center">Cadastro de Professor</h2>
+		
+		<% String error = request.getParameter("error");
+		   if ("cidade".equals(error)) { %>
+		   <div class="alert alert-danger" role="alert">
+		       Por favor, selecione uma cidade antes de continuar.
+		   </div>
+		<% } %>
 
 		<form action="TeacherController" method="POST"
-			enctype="multipart/form-data" novalidate>
+			enctype="multipart/form-data">
 			<input type="hidden" name="email" value="${param.email}" /> <input
 				type="hidden" name="senha" value="${param.senha}" /> <input
 				type="hidden" name="tipo" value="${param.tipo}" />
