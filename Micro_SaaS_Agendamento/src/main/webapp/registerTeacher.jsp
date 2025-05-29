@@ -42,7 +42,7 @@
 
 			<div class="mb-3">
 				<label for="profilePicture" class="form-label">Foto de
-					Perfil / Logo (.jpg ou .jpeg)</label> <input type="file"
+					Perfil / Logo (.jpg ou .jpeg ou .png)</label> <input type="file"
 					class="form-control" id="profilePicture" name="profilePicture"
 					accept="image/jpeg,image/jpg" required />
 			</div>
