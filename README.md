@@ -22,7 +22,7 @@ O projeto do MicroSaaS para Agendamento de Aulas foi criado pelo aluno do curso 
 - **Padrões de Projeto:** Foram utilizados os padrões FrontControler, MVC, DAO.
 - **Aplicativos:** MySQL Workbench e Eclipse.
 
-## Sobre o projeto ℹ
+## Sobre o projeto ℹ️
 
 Projeto da disciplina de Desenvolvimento de Software para Web 2, com o objetivo de criar um Micro SaaS para agendamentos. No qual permite cadastro e acessos de dois tipos de Usuário (aluno / professor).
 
