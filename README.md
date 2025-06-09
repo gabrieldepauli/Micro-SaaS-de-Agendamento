@@ -7,6 +7,21 @@
 O projeto do MicroSaaS para Agendamento de Aulas foi criado pelo aluno do curso de Análise e Desenvolvimento de Sistemas no IFSP - Campus Araraquara abaixo:
 - **Gabriel de Pauli Santos**
 
+### Tecnologias utilizadas 👩‍💻
+
+- **JSP:** Utilizado na criação das páginas usadas no projeto.
+- **Java:** Principal linguagem de programação utilizada, necessária para a criação de toda a lógica das funções do programa. **OBS: O aplicativo está utilizando o Java 21.**
+- **Servlet:** Utilizado nos FrontControllers.
+- **Session:** Utilizado para criar a sessão do usuário.
+- **Filtros:** Utilizado para conferir a sessão do usuário para poder realizar o encaminhamento para as páginas, que necessitam de Login para serem acessadas.
+- **JNDI:** Utilizado para acessar o Banco de Dados e realizar transações.
+- **SQL:** Utilizado para armazenar os dados no Banco de Dados.
+- **Bootstrap:** Utilizado para estilizar as página JSP.
+- **CSS:** Utilizado para fazer a estilização das páginas utilizadas.
+- **Pool de conexões:** Utilizado para gerenciar as conexões do banco de dados. 
+- **Padrões de Projeto:** Foram utilizados os padrões FrontControler, MVC, DAO.
+- **Aplicativos:** MySQL Workbench e Eclipse.
+
 ## Sobre o projeto ℹ
 
 Projeto da disciplina de Desenvolvimento de Software para Web 2, com o objetivo de criar um Micro SaaS para agendamentos. No qual permite cadastro e acessos de dois tipos de Usuário (aluno / professor).
